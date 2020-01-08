@@ -19,70 +19,56 @@ import { MenuparentPage } from '../menuparent/menuparent';
   templateUrl: 'testlogin.html',
 })
 export class TestloginPage {
-  username:string;
-  password:string;
-  key:string = 'username';
-  keytwo:string = 'password';
-  data: Observable<any>;
-  
+  username: string;
+  password: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private storage: Storage,public http: HttpClient) {
+  data: Observable<any>;
+
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage, public http: HttpClient) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TestloginPage');
   }
 
-  
-Testlog(username,password){
- 
-  var url = 'http://127.0.0.1/servicephp/getparent.php?username='+username+'&password='+password;
-  console.log(url);
-  this.data = this.http.get(url,username);
-  this.data = this.http.get(url,password);
 
-  this.data.subscribe(data => {
-   
-    console.log(data.qrId);
-  if(data.qrId == null){
-       alert("ไม่มีusernameนี้ในระบบ");
+  Testlog(username, password) {
 
-   }else{
-      alert(username);
-      this.navCtrl.push(MenuparentPage);
-   }
-  
-    console.log(data);
-   
-  
-  });
-}
-    
- 
-// login(_username, _password) {
-//   alert('Please User,Password ' + _username + _password);
-//   if (_password == '3001569') {
-//     this.loginResult = "Pass";
-//     this.navCtrl.push(MenuparentPage);
-//   }else {
-//     this.loginResult = "Faild";
+    var url = 'http://127.0.0.1/servicephp/getparent.php?username=' + username + '&password=' + password;
+    console.log(url);
+    this.data = this.http.get(url, username);
+    this.data = this.http.get(url, password);
 
-//   }
-// }
+    this.data.subscribe(data => {
 
-  Savelogin(){
-    
-    this.storage.set(this.key, this.username);
-    this.storage.set(this.keytwo, this.password);
-    this.storage.get('username').then((val) => {
-      console.log('username is', val);
+      console.log(data);
+      this.storage.set('card_id', data.card_id);
+      this.storage.get('card_id').then((val) => {
+        console.log('card_id is', val);
+      })
+
+      this.storage.set('qrId', data.qrId);
+      this.storage.get('qrId').then((val) => {
+        console.log('qrId is', val);
+      })
+
+
+      console.log(data.qrId);
+      if (data.qrId == null) {
+        alert("ไม่มีusernameนี้ในระบบ");
+
+      } else {
+        alert(username);
+        this.navCtrl.push(MenuparentPage);
+      }
+
+      console.log(data);
+
+
     });
-
-    this.storage.get('password').then((val) => {
-      console.log('password is', val);
-    });
-    
   }
 
- 
+
+
 }//end class

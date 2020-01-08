@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
+import { Storage } from '@ionic/storage';
+
+
+
 
 /**
  * Generated class for the BmiviewPage page.
@@ -16,9 +20,13 @@ import { HttpClient } from '@angular/common/http';
 })
 export class BmiviewPage {
   bmiArray = [];
+  studentArray =[];
+  qrId='';
+ 
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public http:HttpClient) {
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,public http:HttpClient,private storage: Storage) {
     this.loadbmiData();
   }
 
@@ -26,16 +34,23 @@ export class BmiviewPage {
     console.log('ionViewDidLoad BmiviewPage');
   }
   loadbmiData(){
-    let url = "http://localhost/servicephp/getbmi.php/";
-    this.http.get(url).subscribe((data: any) => {
-      this.bmiArray = data.bmi;
-      console.log(this.bmiArray);
-    }, (error) => { console.log(error) });
+
+    this.storage.get('qrId').then((val) => {
+
+      // console.log(val);
+      let url = "http://localhost/servicephp/getbmi.php?qrId="+val;
+      this.http.get(url).subscribe((data: any) => {
+        this.bmiArray = data.bmi;
+        this.studentArray = data.student;
+      
+        // console.log(data);
+        
+      }, (error) => { console.log(error) });
+    })
+
+    
 
   }
 
-  viewDetail(item: any){
-    this.navCtrl.push("SickStdForTeacherPage",item);
-  
-  }
-}
+
+}//end class
