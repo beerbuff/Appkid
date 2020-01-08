@@ -1,0 +1,59 @@
+<!--
+  Generated template for the MenuteacherPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="dark">
+  <ion-title>Menuparent</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding id="menuparent">
+  <ion-list>
+    <ion-item id="menuparent" (click)="Qrview()">
+      <ion-thumbnail item-start>
+        <img src="http://localhost/image/qr-code.png">
+      </ion-thumbnail>
+      <h2>QR Code</h2>
+      <p>Scan การมารับ-ส่ง</p>
+      <button ion-button clear item-end>View</button>
+    </ion-item>
+
+
+    <ion-item id="menuparent" (click)="Upcoming()">
+        <ion-thumbnail item-start>
+          <img src="http://localhost/image/prescription.png">
+        </ion-thumbnail>
+        <h2>Leave Sick</h2>
+        <p>ลาป่วย</p>
+        <button ion-button clear item-end (click)="Upcoming()">View</button>
+      </ion-item>
+
+
+
+
+      <ion-item id="menuparent" (click)="activityView()">
+          <ion-thumbnail item-start>
+            <img src="http://localhost/image/ball.png">
+          </ion-thumbnail>
+          <h2>Activity</h2>
+          <p>เรียกดูข้อมูลกิจกรรม</p>
+          <button ion-button clear item-end>View</button>
+        </ion-item>
+
+        
+      <ion-item id="menuparent" (click)="Bmiview()">
+        <ion-thumbnail item-start>
+          <img src="http://localhost/image/bathroom-scale.png">
+        </ion-thumbnail>
+        <h2>BMI</h2>
+        <p>เรียกดูดัชนีมวลกาย</p>
+        <button ion-button clear item-end>View</button>
+      </ion-item>
+
+
+
+  </ion-list>
+</ion-content>
